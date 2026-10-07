@@ -1,0 +1,27 @@
+# Данные (большие файлы, не заливаем в репозиторий)
+data/*.h5ad
+data/*.txt.gz
+data/*.csv
+
+# Результаты анализа
+results/
+!results/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
