@@ -1,4 +1,3 @@
-markdown
 # scRNA-seq Analysis Pipeline for Breast Cancer
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
@@ -22,6 +21,7 @@ markdown
 
 **Single-cell RNA-seq (scRNA-seq)** позволяет исследовать транскриптом 
 отдельных клеток, выявляя гетерогенность опухоли. Это критично для понимания:
+
 - Какие субпопуляции клеток присутствуют в опухоли.
 - Как они различаются по экспрессии клинически значимых генов.
 - Какие клетки могут быть чувствительны или устойчивы к терапии.
@@ -34,7 +34,7 @@ Basal-like). Атлас был создан для автоматической
 
 ## Pipeline Steps
 
-```
+```text
 ┌─────────────────┐
 │  Загрузка данных │  ← GSE173634 (h5ad)
 └────────┬────────┘
@@ -96,76 +96,71 @@ adata.var_names_make_unique()
 
 # Сохранение в h5ad
 adata.write("GSE173634_Human_BreastCancer_32CellLines.h5ad")
-Результат: AnnData-объект с 35,276 клетками и ~20,000 генов.
 ```
 
-**Список митохондриальных генов: data/MT.csv — используется для удаления
-MT-генов перед анализом.**
+**Результат:** AnnData-объект с 35,276 клетками и ~20,000 генов.
+
+**Список митохондриальных генов:** `data/MT.csv` — используется для удаления 
+MT-генов перед анализом.
 
 ## Tools & Technologies
-Python 3.10+
 
-**Scanpy** — анализ scRNA-seq данных
+- **Python 3.10+**
+- **Scanpy** — анализ scRNA-seq данных
+- **Scrublet** — удаление двойных клеток
+- **Pandas, NumPy** — работа с данными
+- **Matplotlib, Seaborn** — визуализация
+- **PyYAML** — конфигурация
 
-**Scrublet** — удаление двойных клеток
+## Installation
 
-**Pandas, NumPy** — работа с данными
-
-**Matplotlib, Seaborn** — визуализация
-
-**PyYAML** — конфигурация
-
-### Installation
 ```bash
 git clone https://github.com/diatrimma/scRNA-seq-Breast-Cancer-Pipeline.git
 cd scRNA-seq-Breast-Cancer-Pipeline
 pip install -r requirements.txt
 ```
-### Usage
-Скачайте данные GSE173634 и поместите .h5ad-файл в data/.
 
-Настройте параметры в config.yaml.
+## Usage
 
-Запустите пайплайн:
+1. Скачайте данные GSE173634 и поместите `.h5ad`-файл в `data/`.
+2. Настройте параметры в `config.yaml`.
+3. Запустите пайплайн:
 
 ```bash
 python pipeline.py --config config.yaml
 ```
-Сгенерируйте HTML-отчёт:
+
+4. Сгенерируйте HTML-отчёт:
 
 ```bash
 python generate_report.py --results results/
-Results
 ```
-## Пайплайн генерирует:
 
-**QC-визуализации:** violin plots, scatter plots до и после фильтрации.
+## Results
 
-**Анализ двойников:** гистограмма doublet scores.
+Пайплайн генерирует:
 
-**PCA-визуализация:** проекция клеток на главные компоненты.
-
-**Кластеры Leiden:** таблица с топ-маркерными генами.
-
-**HTML-отчёт:** интерактивный отчёт со всеми результатами.
+- **QC-визуализации**: violin plots, scatter plots до и после фильтрации.
+- **Анализ двойников**: гистограмма doublet scores.
+- **PCA-визуализация**: проекция клеток на главные компоненты.
+- **Кластеры Leiden**: таблица с топ-маркерными генами.
+- **HTML-отчёт**: интерактивный отчёт со всеми результатами.
 
 ## Skills Demonstrated
-Работа с scRNA-seq данными (AnnData, Scanpy).
 
-Контроль качества и фильтрация клеток.
+- Работа с scRNA-seq данными (AnnData, Scanpy).
+- Контроль качества и фильтрация клеток.
+- Удаление двойных клеток (Scrublet).
+- Кластеризация (Leiden) и дифференциальная экспрессия (Wilcoxon).
+- Визуализация данных и генерация HTML-отчётов.
+- Воспроизводимость анализа (config-файлы, логирование).
 
-Удаление двойных клеток (Scrublet).
+## Author
 
-Кластеризация (Leiden) и дифференциальная экспрессия (Wilcoxon).
+**Анастасия Попова**
+- GitHub: [@diatrimma](https://github.com/diatrimma)
+- Email: popova.ai@phystech.edu
 
-Визуализация данных и генерация HTML-отчётов.
+## License
 
-Воспроизводимость анализа (config-файлы, логирование).
-
-**Author:** Анастасия Попова
-
-**GitHub:** @diatrimma
-
-**Email:** popova.ai@phystech.edu
-
-**License:** MIT License
+MIT License
