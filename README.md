@@ -33,39 +33,40 @@ Basal-like). Атлас был создан для автоматической
 диагностики и предсказания лекарственной чувствительности.
 
 ## Pipeline Steps
-┌─────────────────┐
-│ Загрузка данных │ ← GSE173634 (h5ad)
-└────────┬────────┘
-↓
-┌─────────────────┐
-│ QC метрики │ ← n_genes, n_counts, percent_mito
-└────────┬────────┘
-↓
-┌─────────────────┐
-│ Фильтрация │ ← min/max genes, counts, mito%
-└────────┬────────┘
-↓
-┌─────────────────┐
-│ Scrublet │ ← удаление двойных клеток
-└────────┬────────┘
-↓
-┌─────────────────┐
-│ Нормализация │ ← log-normalization, HVG
-└────────┬────────┘
-↓
-┌─────────────────┐
-│ PCA + Leiden │ ← кластеризация
-└────────┬────────┘
-↓
-┌─────────────────┐
-│ Wilcoxon DE │ ← маркерные гены по кластерам
-└────────┬────────┘
-↓
-┌─────────────────┐
-│ HTML отчёт │ ← визуализация результатов
-└─────────────────┘
 
-text
+```
+┌─────────────────┐
+│  Загрузка данных │  ← GSE173634 (h5ad)
+└────────┬────────┘
+         ↓
+┌─────────────────┐
+│  QC метрики     │  ← n_genes, n_counts, percent_mito
+└────────┬────────┘
+         ↓
+┌─────────────────┐
+│  Фильтрация     │  ← min/max genes, counts, mito%
+└────────┬────────┘
+         ↓
+┌─────────────────┐
+│  Scrublet       │  ← удаление двойных клеток
+└────────┬────────┘
+         ↓
+┌─────────────────┐
+│  Нормализация   │  ← log-normalization, HVG
+└────────┬────────┘
+         ↓
+┌─────────────────┐
+│  PCA + Leiden   │  ← кластеризация
+└────────┬────────┘
+         ↓
+┌─────────────────┐
+│  Wilcoxon DE    │  ← маркерные гены по кластерам
+└────────┬────────┘
+         ↓
+┌─────────────────┐
+│  HTML отчёт     │  ← визуализация результатов
+└─────────────────┘
+```
 
 ## Data
 
@@ -98,54 +99,57 @@ adata.write("GSE173634_Human_BreastCancer_32CellLines.h5ad")
 Результат: AnnData-объект с 35,276 клетками и ~20,000 генов.
 ```
 
-Список митохондриальных генов: data/MT.csv — используется для удаления
-MT-генов перед анализом.
+**Список митохондриальных генов: data/MT.csv — используется для удаления
+MT-генов перед анализом.**
 
-Tools & Technologies
+## Tools & Technologies
 Python 3.10+
 
-Scanpy — анализ scRNA-seq данных
+**Scanpy** — анализ scRNA-seq данных
 
-Scrublet — удаление двойных клеток
+**Scrublet** — удаление двойных клеток
 
-Pandas, NumPy — работа с данными
+**Pandas, NumPy** — работа с данными
 
-Matplotlib, Seaborn — визуализация
+**Matplotlib, Seaborn** — визуализация
 
-PyYAML — конфигурация
+**PyYAML** — конфигурация
 
-Installation
-bash
+### Installation
+```bash
 git clone https://github.com/diatrimma/scRNA-seq-Breast-Cancer-Pipeline.git
 cd scRNA-seq-Breast-Cancer-Pipeline
 pip install -r requirements.txt
-Usage
+```
+### Usage
 Скачайте данные GSE173634 и поместите .h5ad-файл в data/.
 
 Настройте параметры в config.yaml.
 
 Запустите пайплайн:
 
-bash
+```bash
 python pipeline.py --config config.yaml
+```
 Сгенерируйте HTML-отчёт:
 
-bash
+```bash
 python generate_report.py --results results/
 Results
-Пайплайн генерирует:
+```
+## Пайплайн генерирует:
 
-QC-визуализации: violin plots, scatter plots до и после фильтрации.
+**QC-визуализации:** violin plots, scatter plots до и после фильтрации.
 
-Анализ двойников: гистограмма doublet scores.
+**Анализ двойников:** гистограмма doublet scores.
 
-PCA-визуализация: проекция клеток на главные компоненты.
+**PCA-визуализация:** проекция клеток на главные компоненты.
 
-Кластеры Leiden: таблица с топ-маркерными генами.
+**Кластеры Leiden:** таблица с топ-маркерными генами.
 
-HTML-отчёт: интерактивный отчёт со всеми результатами.
+**HTML-отчёт:** интерактивный отчёт со всеми результатами.
 
-Skills Demonstrated
+## Skills Demonstrated
 Работа с scRNA-seq данными (AnnData, Scanpy).
 
 Контроль качества и фильтрация клеток.
@@ -158,13 +162,10 @@ Skills Demonstrated
 
 Воспроизводимость анализа (config-файлы, логирование).
 
-Author
-Анастасия Попова
+**Author:** Анастасия Попова
 
-GitHub: @diatrimma
+**GitHub:** @diatrimma
 
-Email: popova.ai@phystech.edu
+**Email:** popova.ai@phystech.edu
 
-License
-
-MIT License
+**License:** MIT License
