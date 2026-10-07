@@ -32,6 +32,22 @@
 Basal-like). Атлас был создан для автоматической 
 диагностики и предсказания лекарственной чувствительности.
 
+## Repository Structure
+
+```text
+scRNA-seq-Breast-Cancer-Pipeline/
+├── README.md                  # описание проекта
+├── requirements.txt           # зависимости Python
+├── config.yaml                # параметры анализа
+├── pipeline.py                # основной пайплайн анализа
+├── generate_report.py         # генератор HTML-отчёта
+├── .gitignore                 # исключения для Git
+├── data/
+│   └── README.md              # описание данных и инструкция по скачиванию
+└── results/
+    └── .gitkeep               # папка для результатов
+```
+
 ## Pipeline Steps
 
 ```text
