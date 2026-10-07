@@ -96,6 +96,7 @@ adata.var_names_make_unique()
 # Сохранение в h5ad
 adata.write("GSE173634_Human_BreastCancer_32CellLines.h5ad")
 Результат: AnnData-объект с 35,276 клетками и ~20,000 генов.
+```
 
 Список митохондриальных генов: data/MT.csv — используется для удаления
 MT-генов перед анализом.
